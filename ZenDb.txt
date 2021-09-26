@@ -1,0 +1,153 @@
+/*Design database for Zen class programme
+users
+codekata
+attendance
+topics
+tasks
+company_drives
+mentors */
+
+//creating database for Zen Class
+
+use zenDb;
+
+//creating collection users and inserting data
+
+//this step is not necessary, just for clearification
+db.createCollection("users");
+
+db.users.insertMany([{"name":"Arpan", "email":"arpan@gmail.com", "id":1, "mentor":"Ravi" },
+{"name":"Rahul", "email":"rahul@gmail.com", "id":2, "mentor":"Ravi"},
+{"name":"Subbu", "email":"subbu@gmail.com", "id":3, "mentor":"Ankit"},
+{"name":"Rohit", "email":"rohit@gmail.com", "id":4, "mentor":"Roy"},
+{"name":"Asha", "email":"asha@gmail.com", "id":5, "mentor":"Ankit"},
+{"name":"Lata", "email":"lata@gmail.com", "id":6, "mentor":"Ankit"},
+{"name":"Ram", "email":"ram@gmail.com", "id":7, "mentor":"Ankit"},
+{"name":"Mohan", "email":"mohan@gmail.com", "id":8, "mentor":"Ankit"},
+{"name":"Harry", "email":"harry@gmail.com", "id":9, "mentor":"Ankit"},
+{"name":"Reena", "email":"reena@gmail.com", "id":10, "mentor":"Ankit"},
+{"name":"Jake", "email":"jake@gmail.com", "id":11, "mentor":"Ankit"},
+{"name":"Paul", "email":"paul@gmail.com", "id":12, "mentor":"Ankit"},
+{"name":"Laxmi", "email":"laxmi@gmail.com", "id":13, "mentor":"Ankit"},
+{"name":"Vijay", "email":"vijay@gmail.com", "id":14, "mentor":"Ankit"},
+{"name":"Suman", "email":"suman@gmail.com", "id":15, "mentor":"Ankit"},
+{"name":"Sham", "email":"sham@gmail.com", "id":16, "mentor":"Ankit"},
+{"name":"Sohan", "email":"sohan@gmail.com", "id":17, "mentor":"Ankit"},
+{"name":"Zero", "email":"zero@gmail.com", "id":18, "mentor":"Ankit"},
+{"name":"Zoro", "email":"zoro@gmail.com", "id":19, "mentor":"Ankit"},
+{"name":"Mohit", "email":"mohit@gmail.com", "id":20, "mentor":"Roy"},
+])
+
+//creating collection codekata and inserting data
+
+db.createCollection("codekata");
+
+db.codekata.insertMany([{"userName":"Arpan", "email":"arpan@gmail.com","totalQuestions":10, 
+"questionsSolved":8 },
+{"userName":"Rahul", "email":"rahul@gmail.com","totalQuestions":10, "questionsSolved":9},
+{"userName":"Subbu", "email":"subbu@gmail.com","totalQuestions":10, "questionsSolved":10},
+{"userName":"Lata", "email":"lata@gmail.com","totalQuestions":10, "questionsSolved":10},
+{"userName":"Harry", "email":"harry@gmail.com","totalQuestions":10, "questionsSolved":8}])
+
+//creating collection attendence and inserting
+
+db.createCollection("attendence");
+
+db.attendence.insertMany([{"date": ISODate("2020-10-13T00:00:00Z"), "studentsAbsent":["Ram","Mohan"], "studentsTaskNotSubmitted":["Ram","Mohan"]},
+{"date":  ISODate("2020-10-15T00:00:00Z"), "studentsAbsent":["Ram","Mohan"], "studentsTaskNotSubmitted":["Ram","Laxmi"]},
+{"date":  ISODate("2020-10-17T00:00:00Z"), "studentsAbsent":["Lata","Sham","Subbu"], "studentsTaskNotSubmitted":["Ram","Reena"]},
+{"date": ISODate("2020-10-20T00:00:00Z"), "studentsAbsent":["Ram","Mohan","Laxmi","Sham","Jake"], 
+"studentsTaskNotSubmitted":["Ram","Paul"]},
+{"date":  ISODate("2020-10-25T00:00:00Z"), "studentsAbsent":[], "studentsTaskNotSubmitted":["Jake","Suman","Rohit"]},
+{"date":  ISODate("2020-10-30T00:00:00Z"), "studentsAbsent":[], "studentsTaskNotSubmitted":[]},
+])
+
+//creating collection topics
+
+db.createCollection("topics");
+
+db.topics.insertMany([{"name": "Html", "id":1, "month":"september"}, 
+{"name":"CSS", "id":2,"month":"september"},{"name":"javascript", "id":3,"month":"october"},
+{"name":"reactjs", "id":4,"month":"october"},{"name":"database", "id":5,"month":"november"}])
+
+//creating collection tasks and inserting
+
+db.createCollection("tasks");
+
+db.tasks.insertMany([{"task1":"create form", "task2":"create table", "month":"september"},
+{"task1":"write function to add 2 numbers", "task2":"write function to get users data", "month":"october"},
+{"task1":"create table in MySQL", "task2":"create collections in MongoDb", "month":"november"}])
+
+//creating collection company_drives and inserting
+
+db.createCollection("company_drives");
+
+db.company_drives.insertMany([{"date":  ISODate("2020-10-13T00:00:00Z"), "name":"TCS","studentsAttended":["Arpan","Rahul","Asha","Mohit","Sohan","Laxmi","Harry"]},
+{"date": ISODate("2020-10-15T00:00:00Z"), "name":"Amazon","studentsAttended":["Arpan","Subbu","Asha","Zero","Zoro","Ram"]},
+{"date":  ISODate("2020-10-20T00:00:00Z"), "name":"Microsoft","studentsAttended":["Rahul","Rohit","Asha","Suman","Sham","Jake","Paul"]},
+{"date":  ISODate("2020-10-30T00:00:00Z"), "name":"Uber","studentsAttended":["Arpan","Rahul","Subbu","Mohit","Lata","Reena"]},
+])
+
+//creating collection mentors and inserting data
+
+db.createCollection("mentors");
+
+db.mentors.insertMany([{"name":"Ankit", "email":"ankit@gmail.com" },
+{"name":"Ravi", "email":"ravi@gmail.com"},
+{"name":"Roy", "email":"roy@gmail.com"},
+])
+
+/* Find all the topics and tasks which are thought in the month of October
+Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020
+Find all the company drives and students who are appeared for the placement.
+Find the number of problems solved by the user in codekata
+Find all the mentors with who has the mentee's count more than 15
+Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 31-oct-2020 */
+
+// Find all the topics and tasks which are thought in the month of October
+
+db.topics.find({"month":"october"},{"name":1})
+db.tasks.find({ "month":"october"}, {"task1": 1, "task2": 1})
+
+//Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020
+
+db.company_drives.find({"date": {$gte:ISODate("2020-10-15T00:00:00Z"), $lt:ISODate("2020-11-01T00:00:00Z")}})
+
+//Find all the company drives and students who are appeared for the placement.
+
+db.company_drives.find({},{"name":1, "studentsAttended": 1})
+
+//Find the number of problems solved by the user in codekata
+
+db.codekata.find({"userName":"Arpan"}, {"userName": 1, "questionsSolved": 1, "_id":0})
+
+//Find all the mentors with who has the mentee's count more than 15
+
+db.users.aggregate([
+	{$group: { _id: "$mentor", totalMentees: {$sum: 1} }},
+	{$project: {mentor: "$_id",  _id:0,totalMentees: 1} },
+	{$match:{ totalMentees:{ $gt :15 } }}	
+])
+
+//Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 31-oct-2020
+
+db.attendence.aggregate([
+	//matching the dates
+ {$match: {date: {$gte:ISODate("2020-10-15T00:00:00Z"), $lt:ISODate("2020-11-01T00:00:00Z")} } },
+
+	//creating common elements array for the common students
+ {$project: { date: 1 , commonElements:{$setIntersection:["$studentsAbsent", "$studentsTaskNotSubmitted"]}}},
+
+	//matching not empty arrays 
+ {$match: {  commonElements: { $ne : [] } }},
+
+	//counting the common students daywise
+ {$project: { date: 1,  countStudentsAbsentAndTaskNotComplete: {$size: "$commonElements" } } } ,
+
+ 	//counting the total students
+ {$group: {  _id: "countStudentsAbsentAndTaskNotComplete",
+total: {$sum :"$countStudentsAbsentAndTaskNotComplete"} } }	
+])
+
+
+
